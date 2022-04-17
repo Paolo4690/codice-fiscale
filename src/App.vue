@@ -1,30 +1,26 @@
 <template>
   <div id="app">
-    <label for="nome">Nome</label>
-    <input v-model.trim="nome" type="text" name="nome" id="nome"><br>
-    <label for="cognome">Cognome</label>
-    <input v-model.trim="cognome" type="text" name="cognome" id="cognome"><br>
-    <label for="sesso">Sesso</label>
-    <select v-model="sesso">
-      <option value="M">M</option>
-      <option value="F">F</option>
-    </select><br>
-    <label for="comune">Comune di nascita</label>
-    <input v-model.trim="comune" type="text" name="comune" id="comune"><br>
-    <label for="provincia">Provincia (Sigla)</label>
-    <input v-model.trim="provincia" type="text" maxlength="2" name="provincia" id="provincia"><br>
-    <label for="data">Data di nascita</label>
-    <select v-model="giorno">
-      <option v-for="giorno in $store.state.GG" :key="giorno" :value="giorno">{{ giorno }}</option>
-    </select>
-    <select v-model="mese">
-      <option v-for="mese in $store.state.MM" :key="mese" :value="mese">{{ mese }}</option>
-    </select>
-    <select v-model="anno">
-      <option v-for="anno in $store.state.YYYY" :key="anno" :value="anno">{{ anno }}</option>
-    </select><br>
+    <div class="container">
+      <h1>{{ codiceFiscale }}</h1>
+      <input v-model.trim="cognome" type="text" name="cognome" id="cognome">
+      <input v-model.trim="nome" type="text" name="nome" id="nome">
+      <input v-model.trim="comune" type="text" name="comune" id="comune">
+      <select v-model="sesso" id="sesso">
+        <option value="M">M</option>
+        <option value="F">F</option>
+      </select>
+      <input v-model.trim="provincia" type="text" maxlength="2" name="provincia" id="provincia"><br>
+      <select v-model="giorno" id="day">
+        <option v-for="giorno in $store.state.GG" :key="giorno" :value="giorno">{{ giorno }}</option>
+      </select>
+      <select v-model="mese" id="month">
+        <option v-for="mese in $store.state.MM" :key="mese" :value="mese">{{ mese }}</option>
+      </select>
+      <select v-model="anno" id="year">
+        <option v-for="anno in $store.state.YYYY" :key="anno" :value="anno">{{ anno }}</option>
+      </select>
+    </div>
     <button @click="res()">Calcola Codice Fiscale</button>
-    <h1>{{ codiceFiscale }}</h1>
   </div>
 </template>
 
@@ -181,5 +177,83 @@ export default {
 </script>
 
 <style lang="scss">
-
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  .container {
+    position: relative;
+    width: 600px;
+    height: 350px;
+    background-image: url(../public/CF-empty.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    input {
+      position: absolute;
+      width: 250px;
+      height: 20px;
+      border: none;
+      border-bottom: 1px solid #000;
+      font-size: 1.3rem;
+      background-color: transparent;
+      font-weight: 600;
+      &:focus {
+        outline: none;
+      }
+    }
+    h1 {
+      position: absolute;
+      top: 168px;
+      left: 119px;
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.7rem;
+    }
+    select {
+      position: absolute;
+      font-size: 1.3rem;
+    }
+    select#sesso {
+      top: 206px;
+      left: 475px;
+    }
+    select#day {
+      top: 285px;
+      left: 340px;
+    }
+    select#month {
+      top: 285px;
+      left: 388px;
+    }
+    select#year {
+      top: 285px;
+      left: 436px;
+    }
+    input#cognome {
+      top: 201px;
+      left: 117px;
+    }
+    input#nome {
+      top: 224px;
+      left: 117px;
+    }
+    input#comune {
+      top: 258px;
+      left: 117px;
+    }
+    input#provincia {
+      top: 288px;
+      left: 119px;
+      width: 50px;
+    }
+  }
+  button {
+    margin-top: 20px;
+  }
+}
 </style>
